@@ -27,9 +27,9 @@ jobs:
       - name: Verify Required Files
         run: |
           test -f requirements/SRS.md
-          test -f z-model/auth-system.zed
-          test -f vdm/auth-system.vdmpp
-          test -f Alloy/auth-system.als
+          test -f z-model/systemauth.zed
+          test -f vdm/systemauth.vdmpp
+          test -f Alloy/Systemauth.als
           test -f README.md
 
       - name: Generate Validation Report
