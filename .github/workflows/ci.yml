@@ -15,7 +15,7 @@ jobs:
 
       - name: Checkout Repository
         uses: actions/checkout@v3
- 
+
       - name: Verify Folder Structure
         run: |
           test -d project-root/requirements
@@ -32,6 +32,13 @@ jobs:
           test -f project-root/z-model/systemauth.zed
           test -f project-root/vdm/systemauth.vdmpp
           test -f project-root/Alloy/Systemauth.als
+          test -f README.md
+
+      - name: Verify Validation Files
+        run: |
+          test -f "project-root/Validation/RequirRequirement Validation CheckList"
+          test -f project-root/Validation/final-system-validation.md
+          test -f project-root/Validation/owasp-zap-report.md
 
       - name: Generate Validation Report
         run: |
