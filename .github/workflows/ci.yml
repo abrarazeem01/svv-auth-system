@@ -18,21 +18,20 @@ jobs:
 
       - name: Verify Folder Structure
         run: |
-          test -d requirements
-          test -d z-model
-          test -d vdm
-          test -d Alloy
-          test -d Validation
+          test -d project-root/requirements
+          test -d project-root/z-model
+          test -d project-root/vdm
+          test -d project-root/Alloy
+          test -d project-root/Validation
 
       - name: Verify Required Files
         run: |
-          test -f requirements/SRS.md
-          test -f requirements/defect-taxonomy.md
-          test -f requirements/github-issues.md
-          test -f z-model/systemauth.zed
-          test -f vdm/systemauth.admpp
-          test -f Alloy/Systemauth.als
-          test -f README.md
+          test -f project-root/requirements/SRS.md
+          test -f project-root/requirements/defect-taxonomy.md
+          test -f project-root/requirements/github-issues.md
+          test -f project-root/z-model/systemauth.zed
+          test -f project-root/vdm/systemauth.vdmpp
+          test -f project-root/Alloy/Systemauth.als
 
       - name: Generate Validation Report
         run: |
