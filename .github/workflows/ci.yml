@@ -6,7 +6,6 @@ on:
       - main
 
 jobs:
-
   validate-project:
 
     runs-on: ubuntu-latest
@@ -18,27 +17,39 @@ jobs:
 
       - name: Verify Folder Structure
         run: |
-          test -d project-root/requirements
-          test -d project-root/z-model
-          test -d project-root/vdm
-          test -d project-root/Alloy
-          test -d project-root/Validation
+          test -d requirements
+          test -d z-model
+          test -d vdm
+          test -d Alloy
+          test -d Validation
 
-      - name: Verify Required Files
+      - name: Verify Requirement Files
         run: |
-          test -f project-root/requirements/SRS.md
-          test -f project-root/requirements/defect-taxonomy.md
-          test -f project-root/requirements/github-issues.md
-          test -f project-root/z-model/systemauth.zed
-          test -f project-root/vdm/systemauth.vdmpp
-          test -f project-root/Alloy/Systemauth.als
-          test -f README.md
+          test -f requirements/SRS.md
+          test -f requirements/defect-taxonomy.md
+          test -f requirements/github-issues.md
+
+      - name: Verify Z Model
+        run: |
+          test -f z-model/systemauth.zed
+
+      - name: Verify VDM Model
+        run: |
+          test -f vdm/systemauth.vdmpp
+
+      - name: Verify Alloy Model
+        run: |
+          test -f Alloy/Systemauth.als
 
       - name: Verify Validation Files
         run: |
-          test -f "project-root/Validation/RequirRequirement Validation CheckList"
-          test -f project-root/Validation/final-system-validation.md
-          test -f project-root/Validation/owasp-zap-report.md
+          test -f "Validation/RequirRequirement Validation CheckList"
+          test -f Validation/final-system-validation.md
+          test -f Validation/owasp-zap-report.md
+
+      - name: Verify README
+        run: |
+          test -f README.md
 
       - name: Generate Validation Report
         run: |
