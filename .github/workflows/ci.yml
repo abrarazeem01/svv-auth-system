@@ -1,4 +1,4 @@
-- name: Debug Validation Folder
+  name: Debug Validation Folder
   run: |
     echo "Inside project-root:"
     ls project-root
