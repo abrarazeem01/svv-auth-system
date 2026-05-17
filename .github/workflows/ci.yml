@@ -55,7 +55,7 @@ jobs:
 
           # Validation files (flexible check)
           check_file "project-root/Validationn/final-system-validation.md" || true
-          check_file "project-root/Validationn/owasp-zap-report.md" || true
+          check_file "project-root/Validationn/owsap-zap-report.md" || true
           check_file "project-root/Validationn/validation-checklist.md" || true
 
           # Formal models
