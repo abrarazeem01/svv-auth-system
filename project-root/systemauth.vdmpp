@@ -1,0 +1,62 @@
+class AuthSystem
+
+types
+
+UserId = token;
+Role = <Admin> | <Manager> | <Employee>;
+Permission = token;
+SessionId = token;
+
+instance variables
+
+users : set of UserId := {};
+
+roles : map UserId to Role := {|->};
+
+permissions : map Role to set of Permission :=
+  {
+    <Admin> |-> {"Read", "Write", "Delete"},
+    <Manager> |-> {"Read", "Write"},
+    <Employee> |-> {"Read"}
+  };
+
+sessions : map SessionId to UserId := {|->};
+
+inv forall s in set dom sessions &
+    sessions(s) in set users;
+
+operations
+
+RegisterUser : UserId * Role ==> ()
+RegisterUser(uid, role) ==
+(
+  users := users union {uid};
+  roles := roles ++ {uid |-> role}
+)
+pre uid not in set users
+post uid in set users;
+
+Login : UserId * SessionId ==> ()
+Login(uid, sid) ==
+(
+  sessions := sessions ++ {sid |-> uid}
+)
+pre uid in set users
+post sid in set dom sessions;
+
+Logout : SessionId ==> ()
+Logout(sid) ==
+(
+  sessions := {sid} <-: sessions
+)
+pre sid in set dom sessions
+post sid not in set dom sessions;
+
+CheckAccess : UserId * Permission ==> bool
+CheckAccess(uid, perm) ==
+(
+  perm in set permissions(roles(uid))
+)
+pre uid in set users;
+
+end AuthSystem
