@@ -5,7 +5,7 @@ This report summarizes the results of automated security testing performed using
 
 Scope of Testing
 
-The following areas were included in the security assessment:
+The following areas were included in the security assessment
 | **Vulnerability**                 | **Description**                                              | **Result**   |
 | --------------------------------- | ------------------------------------------------------------ | ------------ |
 | SQL Injection                     | Injection of malicious SQL queries via input fields          | Not Detected |
