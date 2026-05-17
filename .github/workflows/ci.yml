@@ -1,0 +1,39 @@
+name: SVV Validation Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  validate-project:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Verify Folder Structure
+        run: |
+          test -d requirements
+          test -d z-model
+          test -d vdm
+          test -d Alloy
+          test -d Validation
+          test -d ci-pipeline
+
+      - name: Verify Required Files
+        run: |
+          test -f requirements/SRS.md
+          test -f z-model/auth-system.zed
+          test -f vdm-spec/auth-system.vdmpp
+          test -f alloy-model/auth-system.als
+
+      - name: Generate Validation Report
+        run: |
+          echo "SVV Project Validation Successful"
+
+      - name: Success
+        run: echo "Pipeline Passed"
