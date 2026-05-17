@@ -45,7 +45,7 @@ jobs:
           check_file "project-root/requirements/github-issues.md"
 
           check_file "project-root/Validationn/final-system-validation.md"
-          check_file "project-root/Validationn/owasp-zap-report.md"
+          check_file "project-root/Validationn/owsap-zap-report.md"
           check_file "project-root/Validationn/validation-checklist.md"
 
           check_file "project-root/Alloy/Systemauth.als"
