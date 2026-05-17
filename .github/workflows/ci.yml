@@ -10,7 +10,7 @@ jobs:
   validation:
     name: Run Validation Checks
     runs-on: ubuntu-latest
-
+ 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
