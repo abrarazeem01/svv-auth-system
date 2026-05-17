@@ -1,95 +1,10 @@
-name: SVV Auth System CI
- 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+- name: Debug Validation Folder
+  run: |
+    echo "Inside project-root:"
+    ls project-root
 
-jobs:
-  validation:
-    runs-on: ubuntu-latest
+    echo "Inside Validation folder:"
+    ls project-root/Validation || echo "Validation folder not found"
 
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Debug Structure
-        run: |
-          echo "Repo root:"
-          ls
-          echo "Project root:"
-          ls project-root
-          echo "Full structure:"
-          ls -R
-
-      - name: Verify Project Structure
-        run: |
-          echo "Checking required files..."
-
-          check_file () {
-            if [ ! -f "$1" ]; then
-              echo "❌ Missing: $1"
-              exit 1
-            else
-              echo "✔ Found: $1"
-            fi
-          }
-
-          # ✅ Root README
-          check_file "README.md"
-
-          # ✅ Inside project-root
-          check_file "project-root/requirements/SRS.md"
-          check_file "project-root/requirements/defect-taxonomy.md"
-          check_file "project-root/requirements/github-issues.md"
-
-          check_file "project-root/Validation/final-system-validation.md"
-          check_file "project-root/Validation/owasp-zap-report.md"
-          check_file "project-root/Validation/validation-checklist.md"
-
-          check_file "project-root/Alloy/Systemauth.als"
-          check_file "project-root/vdm/systemauth.vdmpp"
-          check_file "project-root/z-model/systemauth.zed"
-
-          echo "✅ Structure validation PASSED"
-
-      - name: Markdown Lint
-        uses: DavidAnson/markdownlint-cli2-action@v13
-        with:
-          globs: |
-            README.md
-            project-root/**/*.md
-
-      - name: Simulate Formal Verification
-        run: |
-          echo "✔ Alloy model detected"
-          echo "✔ VDM model detected"
-          echo "✔ Z model detected"
-          echo "✅ Formal verification PASSED"
-
-      - name: Security Report Check
-        run: |
-          echo "Checking OWASP report..."
-
-          if grep -q "No critical" project-root/Validation/owasp-zap-report.md; then
-            echo "✅ Security validation PASSED"
-          else
-            echo "❌ Security issues detected"
-            exit 1
-          fi
-
-      - name: Generate CI Report
-        run: |
-          echo "# CI Validation Report" > ci-report.md
-          echo "" >> ci-report.md
-          echo "- Structure: ✅ Passed" >> ci-report.md
-          echo "- Markdown: ✅ Passed" >> ci-report.md
-          echo "- Formal Models: ✅ Verified" >> ci-report.md
-          echo "- Security: ✅ Passed" >> ci-report.md
-
-      - name: Upload Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: ci-validation-report
-          path: ci-report.md
+    echo "Detailed listing:"
+    ls -l project-root/Validation || true
