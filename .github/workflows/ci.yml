@@ -18,48 +18,48 @@ jobs:
         run: |
           echo "Repo root:"
           ls
-          echo "Project root contents:"
+          echo "Project root:"
           ls project-root
           echo "Full structure:"
           ls -R
 
       - name: Verify Project Structure
         run: |
-          echo "Checking required files inside project-root..."
+          echo "Checking required files..."
 
           check_file () {
-            if [ ! -f "project-root/$1" ]; then
-              echo "❌ Missing: project-root/$1"
+            if [ ! -f "$1" ]; then
+              echo "❌ Missing: $1"
               exit 1
             else
-              echo "✔ Found: project-root/$1"
+              echo "✔ Found: $1"
             fi
           }
 
-          # Root inside project-root
+          # ✅ Root README
           check_file "README.md"
 
-          # Requirements
-          check_file "requirements/SRS.md"
-          check_file "requirements/defect-taxonomy.md"
-          check_file "requirements/github-issues.md"
+          # ✅ Inside project-root
+          check_file "project-root/requirements/SRS.md"
+          check_file "project-root/requirements/defect-taxonomy.md"
+          check_file "project-root/requirements/github-issues.md"
 
-          # Validation
-          check_file "Validation/final-system-validation.md"
-          check_file "Validation/owasp-zap-report.md"
-          check_file "Validation/validation-checklist.md"
+          check_file "project-root/Validation/final-system-validation.md"
+          check_file "project-root/Validation/owasp-zap-report.md"
+          check_file "project-root/Validation/validation-checklist.md"
 
-          # Formal Models
-          check_file "Alloy/Systemauth.als"
-          check_file "vdm/systemauth.vdmpp"
-          check_file "z-model/systemauth.zed"
+          check_file "project-root/Alloy/Systemauth.als"
+          check_file "project-root/vdm/systemauth.vdmpp"
+          check_file "project-root/z-model/systemauth.zed"
 
           echo "✅ Structure validation PASSED"
 
       - name: Markdown Lint
         uses: DavidAnson/markdownlint-cli2-action@v13
         with:
-          globs: "project-root/**/*.md"
+          globs: |
+            README.md
+            project-root/**/*.md
 
       - name: Simulate Formal Verification
         run: |
