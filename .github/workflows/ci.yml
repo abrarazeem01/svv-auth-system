@@ -27,8 +27,10 @@ jobs:
       - name: Verify Required Files
         run: |
           test -f requirements/SRS.md
+          test -f requirements/defect-taxonomy.md
+          test -f requirements/github-issues.md
           test -f z-model/systemauth.zed
-          test -f vdm/systemauth.vdmpp
+          test -f vdm/systemauth.admpp
           test -f Alloy/Systemauth.als
           test -f README.md
 
@@ -37,4 +39,5 @@ jobs:
           echo "SVV Validation Successful"
 
       - name: Pipeline Success
-        run: echo "Pipeline Passed"
+        run: |
+          echo "Pipeline Passed"
