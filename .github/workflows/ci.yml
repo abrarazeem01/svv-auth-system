@@ -18,21 +18,20 @@ jobs:
 
       - name: Show Repository Structure
         run: |
-          echo "Repository Structure"
           find .
+
+      - name: Verify Directories
+        run: |
+          test -d requirements
+          test -d Validation
+          test -d Alloy
+          test -d vdm
+          test -d z-model
 
       - name: Generate Validation Report
         run: |
-          echo "# SVV Validation Report" > validation-report.txt
-          echo "" >> validation-report.txt
-          echo "Validation Date: $(date)" >> validation-report.txt
-          echo "" >> validation-report.txt
-          echo "Checks Performed:" >> validation-report.txt
-          echo "- Repository checkout successful" >> validation-report.txt
-          echo "- Folder structure verified" >> validation-report.txt
-          echo "- CI pipeline executed successfully" >> validation-report.txt
-          echo "- Authentication system artifacts present" >> validation-report.txt
-          echo "" >> validation-report.txt
+          echo "SVV Validation Report" > validation-report.txt
+          echo "Pipeline Executed Successfully" >> validation-report.txt
           echo "Validation Result: PASS" >> validation-report.txt
 
       - name: Display Validation Report
@@ -44,7 +43,3 @@ jobs:
         with:
           name: validation-report
           path: validation-report.txt
-
-      - name: Pipeline Success
-        run: |
-          echo "SVV Pipeline Passed Successfully"
