@@ -22,9 +22,9 @@ jobs:
 
       - name: Verify Directories
         run: |
-          test -d requirements
-          test -d Validation
           test -d Alloy
+          test -d Validation
+          test -d requirements
           test -d vdm
           test -d z-model
 
