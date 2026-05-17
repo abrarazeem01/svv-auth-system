@@ -1,0 +1,78 @@
+[USER, ROLE, PERMISSION, SESSION]
+
+AuthSystem
+users : ℙ USER
+roles : USER ↔ ROLE
+permissions : ROLE ↔ PERMISSION
+sessions : SESSION ↔ USER
+
+--------------------------------
+
+dom roles ⊆ users
+ran sessions ⊆ users
+∀ u : users • #(roles[{u}]) = 1
+
+InitAuthSystem
+AuthSystem
+
+--------------------------------
+
+users = ∅
+roles = ∅
+permissions = ∅
+sessions = ∅
+
+RegisterUser
+Δ AuthSystem
+u? : USER
+r? : ROLE
+
+--------------------------------
+
+u? ∉ users
+
+users' = users ∪ {u?}
+roles' = roles ∪ {(u?, r?)}
+permissions' = permissions
+sessions' = sessions
+
+Login
+Δ AuthSystem
+u? : USER
+s? : SESSION
+
+--------------------------------
+
+u? ∈ users
+u? ∉ ran sessions
+
+sessions' = sessions ∪ {(s?, u?)}
+users' = users
+roles' = roles
+permissions' = permissions
+
+Logout
+Δ AuthSystem
+s? : SESSION
+
+--------------------------------
+
+s? ∈ dom sessions
+
+sessions' = {s?} ⩤ sessions
+users' = users
+roles' = roles
+permissions' = permissions
+
+CheckAccess
+Ξ AuthSystem
+u? : USER
+p? : PERMISSION
+result! : BOOL
+
+--------------------------------
+
+result! =
+(∃ r : ROLE •
+((u?, r) ∈ roles ∧
+(r, p?) ∈ permissions))
