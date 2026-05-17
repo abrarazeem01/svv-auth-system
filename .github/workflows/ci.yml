@@ -15,7 +15,7 @@ jobs:
 
       - name: Checkout Repository
         uses: actions/checkout@v3
-
+ 
       - name: Verify Folder Structure
         run: |
           test -d project-root/requirements
