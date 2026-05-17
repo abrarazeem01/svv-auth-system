@@ -44,9 +44,9 @@ jobs:
           check_file "project-root/requirements/defect-taxonomy.md"
           check_file "project-root/requirements/github-issues.md"
 
-          check_file "project-root/Validation/final-system-validation.md"
-          check_file "project-root/Validation/owasp-zap-report.md"
-          check_file "project-root/Validation/validation-checklist.md"
+          check_file "project-root/Validationn/final-system-validation.md"
+          check_file "project-root/Validationn/owasp-zap-report.md"
+          check_file "project-root/Validationn/validation-checklist.md"
 
           check_file "project-root/Alloy/Systemauth.als"
           check_file "project-root/vdm/systemauth.vdmpp"
